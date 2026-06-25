@@ -29,6 +29,10 @@ and commit the regenerated `public/cv.pdf`.
 
 Push to `main`; the Actions workflow (`.github/workflows/deploy.yml`) builds and
 deploys. Set **Settings → Pages → Source = GitHub Actions**. The relative base
-(`base: "./"`) works at a domain root or project subpath. For a custom domain,
-rename `public/CNAME.example` → `public/CNAME` (bare domain, one line) and set it
+(`base: "./"`) works at a domain root or project subpath.
+
+The custom domain is `ruthdelpinobleijerveld.org`, set via `public/CNAME` (copied
+to the site root on build). DNS lives at Namecheap: four `A` records at the apex
+(`@`) pointing to GitHub Pages (`185.199.108.153`–`185.199.111.153`) and a `CNAME`
+on `www` → `nlebovits.github.io`. After DNS propagates, tick **Enforce HTTPS**
 under **Settings → Pages**.
