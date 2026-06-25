@@ -1,7 +1,0 @@
-Place Ruth's CV here as `cv.pdf` (in this `public/` folder).
-
-Anything in `public/` is copied verbatim to the site root at build time, so
-the file becomes available at `/cv.pdf` and the "Curriculum vitae →" / "CV"
-links resolve to it. Until the real PDF is added, those links will 404.
-
-You can delete this note once `public/cv.pdf` exists.

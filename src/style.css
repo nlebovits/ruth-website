@@ -1,165 +1,198 @@
-/* Ruth del Pino Bleijerveld — Variant A, "Hairlines & light".
-   Values are final and intentional (see design handoff). Sharp corners,
-   ultra-light weights, hairline rules, generous whitespace. */
+/* Ruth del Pino Bleijerveld — "Elevated minimalism".
+   Restrained hairline minimalism with one deliberate move: an editorial serif
+   (Newsreader) for the H1 only. Everything else is Libre Franklin. All text
+   meets WCAG AA contrast on the paper background. Sharp corners, generous
+   whitespace, fluid type and spacing. */
+
+:root {
+  /* colour — every text token clears WCAG AA (≥4.5:1) on --bg */
+  --bg: #fcfcfb;
+  --ink: #1a1a1a;          /* primary text */
+  --ink-prose: #333;       /* body prose */
+  --muted: #595959;        /* ~7:1  — places, role detail */
+  --faint: #6d6d6d;        /* ~5.2:1 — eyebrows, dates, nav, footer */
+  --rule: rgba(0, 0, 0, 0.12);
+  --rule-soft: rgba(0, 0, 0, 0.09);
+  --focus: #1a1a1a;
+
+  /* type */
+  --serif: "Newsreader", Georgia, "Times New Roman", serif;
+  --sans: "Libre Franklin", system-ui, sans-serif;
+
+  /* spacing scale */
+  --s1: 0.25rem;
+  --s2: 0.5rem;
+  --s3: 1rem;
+  --s4: 1.5rem;
+  --s5: 2.5rem;
+  --s6: 4rem;
+
+  /* fluid section padding — smooths the tablet range, no hard 760px jump */
+  --pad-y: clamp(2.5rem, 1.8rem + 3vw, 3.5rem);
+  --pad-x: clamp(1.75rem, 0.5rem + 4vw, 3.25rem);
+}
 
 * { box-sizing: border-box; }
 
-html { scroll-behavior: smooth; }
+@media (prefers-reduced-motion: no-preference) {
+  html { scroll-behavior: smooth; }
+}
 
 body {
   margin: 0;
-  background: #fcfcfb;
-  color: #1a1a1a;
-  font-family: "Libre Franklin", system-ui, sans-serif;
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--sans);
+  -webkit-font-smoothing: antialiased;
 }
 
 a { color: inherit; text-decoration: none; }
 
+a:focus-visible {
+  outline: 2px solid var(--focus);
+  outline-offset: 3px;
+  border-radius: 1px;
+}
+
+/* Skip link — hidden until focused */
+.skip-link {
+  position: absolute;
+  left: var(--s2);
+  top: var(--s2);
+  z-index: 10;
+  transform: translateY(-160%);
+  background: var(--ink);
+  color: #fff;
+  padding: 0.5rem 0.875rem;
+  font-size: 0.8125rem;
+  font-weight: 500;
+}
+.skip-link:focus { transform: none; }
+
 .wrap {
   max-width: 1120px;
   margin: 0 auto;
-  border-top: 1px solid rgba(0, 0, 0, 0.1);
+  border-top: 1px solid var(--rule);
 }
 
-.rule-top { border-top: 1px solid rgba(0, 0, 0, 0.07); }
+.rule-top { border-top: 1px solid var(--rule-soft); }
 
 header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 26px 52px;
-  border-bottom: 1px solid rgba(0, 0, 0, 0.07);
+  padding: var(--s4) var(--pad-x);
+  border-bottom: 1px solid var(--rule-soft);
 }
-header .name { font-weight: 500; font-size: 13px; letter-spacing: 0.02em; }
-header nav { display: flex; gap: 30px; font-size: 12px; color: #9a9a9a; font-weight: 400; }
-header nav a:hover { color: #1a1a1a; }
+header .name { font-weight: 500; font-size: 0.8125rem; letter-spacing: 0.02em; }
+header nav { display: flex; gap: 1.875rem; font-size: 0.75rem; color: var(--faint); }
+header nav a:hover { color: var(--ink); }
 
 .eyebrow {
-  font-size: 11px;
-  letter-spacing: 0.2em;
+  font-size: 0.6875rem;
+  letter-spacing: 0.18em;
   text-transform: uppercase;
-  color: #a8a8a8;
+  color: var(--faint);
+  font-weight: 500;
+  margin: 0;
 }
 
 .hero {
-  padding: 52px;
+  padding: var(--pad-y) var(--pad-x);
   display: grid;
   grid-template-columns: 1.1fr 1fr;
-  gap: 56px;
+  gap: clamp(2.25rem, 1rem + 4vw, 3.5rem);
   align-items: center;
 }
 .hero h1 {
-  font-weight: 200;
-  font-size: 48px;
-  line-height: 1.12;
-  letter-spacing: -0.02em;
-  margin: 24px 0 26px;
+  font-family: var(--serif);
+  font-optical-sizing: auto;
+  font-weight: 400;
+  font-size: clamp(2.4rem, 1.6rem + 3.2vw, 3.25rem);
+  line-height: 1.1;
+  letter-spacing: -0.01em;
+  margin: var(--s4) 0;
 }
 .hero p {
-  font-size: 17px;
+  font-size: 1.0625rem;
   line-height: 1.7;
-  color: #555;
-  margin: 0 0 36px;
+  color: var(--muted);
+  margin: 0 0 var(--s5);
   font-weight: 300;
   max-width: 42ch;
 }
-.links { display: flex; gap: 28px; font-size: 13px; font-weight: 400; align-items: center; }
+.links { display: flex; gap: 1.75rem; font-size: 0.8125rem; align-items: center; }
 .links a { border-bottom: 1px solid rgba(0, 0, 0, 0.35); padding-bottom: 3px; }
-.links a:hover { border-bottom-color: #1a1a1a; }
+.links a:hover { border-bottom-color: var(--ink); }
+.hero p.hero-contact { font-size: 1.0625rem; color: var(--muted); margin: 0 0 var(--s5); max-width: 42ch; }
 .hero img {
   display: block;
   width: 100%;
+  height: auto;
   aspect-ratio: 4 / 5;
   object-fit: cover;
-  object-position: 62% center;
-  border-radius: 0;
+  object-position: 50% center;
 }
 
-.about {
-  padding: 52px;
+/* Shared label/content grid for About, Experience, Education, Languages */
+.section-grid {
+  padding: var(--pad-y) var(--pad-x);
   display: grid;
   grid-template-columns: 160px 1fr;
-  gap: 40px;
+  gap: var(--s5);
 }
+
 .about p {
-  font-size: 18px;
-  line-height: 1.78;
-  color: #3a3a3a;
-  margin: 0 0 22px;
+  font-size: 1.125rem;
+  line-height: 1.72;
+  color: var(--ink-prose);
+  margin: 0 0 var(--s4);
   font-weight: 300;
   max-width: 60ch;
 }
 .about p:last-child { margin-bottom: 0; }
 
-/* Experience & Education — reuse the About eyebrow grid; entries grouped by
-   organisation, each role a title/date line with a muted place and an optional
-   one-line detail. Restraint, hairlines, no accent colour. */
-.cv-section {
-  padding: 52px;
-  display: grid;
-  grid-template-columns: 160px 1fr;
-  gap: 40px;
-}
 .cv-body { max-width: 64ch; }
-.org { margin-bottom: 40px; }
+.org { margin-bottom: var(--s5); }
 .org:last-child { margin-bottom: 0; }
 .org-name {
   font-weight: 500;
-  font-size: 14px;
+  font-size: 0.875rem;
   letter-spacing: 0.01em;
-  margin: 0 0 16px;
+  margin: 0 0 var(--s3);
 }
-.role { margin-bottom: 22px; }
+.role { margin-bottom: var(--s4); }
 .role:last-child { margin-bottom: 0; }
 .role-line {
   display: flex;
   justify-content: space-between;
   align-items: baseline;
-  gap: 24px;
+  gap: var(--s4);
 }
-.role-title { font-weight: 400; font-size: 15px; line-height: 1.4; color: #1a1a1a; }
-.role-dates { font-weight: 300; font-size: 12px; color: #9a9a9a; white-space: nowrap; }
-.role-place { font-weight: 300; font-size: 13px; color: #8a8a8a; margin-top: 4px; }
+.role-title { font-weight: 400; font-size: 0.9375rem; line-height: 1.4; color: var(--ink); }
+.role-dates { font-weight: 400; font-size: 0.75rem; color: var(--faint); white-space: nowrap; }
+.role-place { font-weight: 300; font-size: 0.8125rem; color: var(--muted); margin-top: var(--s1); }
 .role-detail {
   font-weight: 300;
-  font-size: 14px;
+  font-size: 0.875rem;
   line-height: 1.65;
-  color: #6f6f6f;
-  margin: 8px 0 0;
+  color: var(--muted);
+  margin: var(--s2) 0 0;
   max-width: 58ch;
 }
 
-.future {
-  padding: 40px 52px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-.future .soon { font-size: 12px; color: #bdbdbd; font-weight: 300; }
-
 footer {
-  padding: 28px 52px;
+  padding: var(--s4) var(--pad-x);
   display: flex;
   justify-content: space-between;
-  font-size: 12px;
-  color: #b0b0aa;
+  font-size: 0.75rem;
+  color: var(--faint);
   font-weight: 300;
 }
 
 @media (max-width: 760px) {
-  header,
-  .hero,
-  .about,
-  .cv-section,
-  .future,
-  footer {
-    padding-left: 28px;
-    padding-right: 28px;
-  }
-  .hero { grid-template-columns: 1fr; gap: 36px; }
-  .about { grid-template-columns: 1fr; gap: 16px; }
-  .cv-section { grid-template-columns: 1fr; gap: 18px; }
-  .role-line { flex-direction: column; gap: 2px; }
-  .hero h1 { font-size: 38px; }
-  header nav { flex-wrap: wrap; justify-content: flex-end; gap: 16px 18px; }
+  .hero { grid-template-columns: 1fr; }
+  .section-grid { grid-template-columns: 1fr; gap: var(--s3); }
+  .role-line { flex-direction: column; gap: var(--s1); }
+  header nav { flex-wrap: wrap; justify-content: flex-end; gap: var(--s3) 1.125rem; }
 }
