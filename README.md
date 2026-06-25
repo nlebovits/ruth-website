@@ -1,56 +1,34 @@
 # Ruth del Pino Bleijerveld — personal site
 
-A single static page for Ruth del Pino Bleijerveld, a junior professional in
-international humanitarian and human-rights law. Design direction: **Variant A
-— "Hairlines & light"** (whitespace, ultra-light type, hairline rules, sharp
-corners). Built with Vite + TypeScript, deployed to GitHub Pages.
-
-## Stack
-
-- **Vite + TypeScript** — one static page, minimal dependency footprint.
-- **Libre Franklin** via Google Fonts (weights 200, 300, 400, 500, 600).
-- **GitHub Pages** via GitHub Actions (`.github/workflows/deploy.yml`).
+Single static page (Vite + TypeScript) for Ruth del Pino Bleijerveld, who works
+on human rights and the rule of law in the OSCE region. Libre Franklin body with
+a Newsreader serif headline; deployed to GitHub Pages via Actions.
 
 ## Develop
 
 ```bash
 pnpm install
-pnpm dev      # local dev server
-pnpm build    # type-check + production build → dist/
-pnpm preview  # serve the production build locally
+pnpm dev      # dev server
+pnpm build    # type-check + build → dist/
+pnpm preview  # serve the build
+pnpm cv       # regenerate the CV PDF from cv/cv.md → public/cv.pdf
 ```
 
-## Assets the user provides
+Page copy/structure: `index.html`. Styling + tokens: `src/style.css`. Files in
+`public/` (portrait, favicon, generated `cv.pdf`) are copied to the site root.
 
-Both live in `public/` (copied verbatim to the site root at build time):
+## CV
 
-- **`public/portrait.jpg`** — the original, unedited portrait. Already in
-  place. Displayed `aspect-ratio: 4/5; object-fit: cover; object-position:
-  62% center` so the subject stays centered.
-- **`public/cv.pdf`** — Ruth's CV. **Not yet added** — see
-  `public/cv.pdf.README.txt`. Until it exists the CV links will 404.
+The résumé is a downloadable PDF, not listed on the page. `cv/cv.md` is the
+single source; `pnpm cv` renders it to `public/cv.pdf` with system Chrome
+(`CHROME_BIN` to override), styled to match the site. It's kept out of
+`pnpm build` so CI needs no browser — after editing `cv/cv.md`, run `pnpm cv`
+and commit the regenerated `public/cv.pdf`.
 
-## Deployment (GitHub Pages)
+## Deploy
 
-1. Push to `main`. The Actions workflow builds and deploys automatically.
-2. In the repo: **Settings → Pages → Build and deployment → Source =
-   GitHub Actions**.
-3. The site uses a **relative base** (`base: "./"` in `vite.config.ts`), so it
-   works both at a custom-domain root and at a project subpath
-   (`user.github.io/ruth-website/`) with no extra config.
-
-### Custom domain
-
-When the domain is ready:
-
-1. Rename `public/CNAME.example` to `public/CNAME` and put the bare domain in
-   it (e.g. `ruthdelpino.com`), one line, no protocol.
-2. Configure the domain in **Settings → Pages → Custom domain** and add the
-   DNS records GitHub shows you.
-
-## Editing content
-
-All copy and structure live in `index.html`; all styling in `src/style.css`
-(design tokens are final — see the design handoff). The "Talks · Podcasts ·
-Writing" section is a placeholder: a list can drop in under its eyebrow later
-without a redesign.
+Push to `main`; the Actions workflow (`.github/workflows/deploy.yml`) builds and
+deploys. Set **Settings → Pages → Source = GitHub Actions**. The relative base
+(`base: "./"`) works at a domain root or project subpath. For a custom domain,
+rename `public/CNAME.example` → `public/CNAME` (bare domain, one line) and set it
+under **Settings → Pages**.
