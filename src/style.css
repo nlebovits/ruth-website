@@ -1,0 +1,124 @@
+/* Ruth del Pino Bleijerveld — Variant A, "Hairlines & light".
+   Values are final and intentional (see design handoff). Sharp corners,
+   ultra-light weights, hairline rules, generous whitespace. */
+
+* { box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  margin: 0;
+  background: #fcfcfb;
+  color: #1a1a1a;
+  font-family: "Libre Franklin", system-ui, sans-serif;
+}
+
+a { color: inherit; text-decoration: none; }
+
+.wrap {
+  max-width: 1120px;
+  margin: 0 auto;
+  border-top: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.rule-top { border-top: 1px solid rgba(0, 0, 0, 0.07); }
+
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 26px 52px;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.07);
+}
+header .name { font-weight: 500; font-size: 13px; letter-spacing: 0.02em; }
+header nav { display: flex; gap: 30px; font-size: 12px; color: #9a9a9a; font-weight: 400; }
+header nav a:hover { color: #1a1a1a; }
+
+.eyebrow {
+  font-size: 11px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: #a8a8a8;
+}
+
+.hero {
+  padding: 52px;
+  display: grid;
+  grid-template-columns: 1.1fr 1fr;
+  gap: 56px;
+  align-items: center;
+}
+.hero h1 {
+  font-weight: 200;
+  font-size: 48px;
+  line-height: 1.12;
+  letter-spacing: -0.02em;
+  margin: 24px 0 26px;
+}
+.hero p {
+  font-size: 17px;
+  line-height: 1.7;
+  color: #555;
+  margin: 0 0 36px;
+  font-weight: 300;
+  max-width: 42ch;
+}
+.links { display: flex; gap: 28px; font-size: 13px; font-weight: 400; align-items: center; }
+.links a { border-bottom: 1px solid rgba(0, 0, 0, 0.35); padding-bottom: 3px; }
+.links a:hover { border-bottom-color: #1a1a1a; }
+.hero img {
+  display: block;
+  width: 100%;
+  aspect-ratio: 4 / 5;
+  object-fit: cover;
+  object-position: 62% center;
+  border-radius: 0;
+}
+
+.about {
+  padding: 52px;
+  display: grid;
+  grid-template-columns: 160px 1fr;
+  gap: 40px;
+}
+.about p {
+  font-size: 18px;
+  line-height: 1.78;
+  color: #3a3a3a;
+  margin: 0 0 22px;
+  font-weight: 300;
+  max-width: 60ch;
+}
+.about p:last-child { margin-bottom: 0; }
+
+.future {
+  padding: 40px 52px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.future .soon { font-size: 12px; color: #bdbdbd; font-weight: 300; }
+
+footer {
+  padding: 28px 52px;
+  display: flex;
+  justify-content: space-between;
+  font-size: 12px;
+  color: #b0b0aa;
+  font-weight: 300;
+}
+
+@media (max-width: 760px) {
+  header,
+  .hero,
+  .about,
+  .future,
+  footer {
+    padding-left: 28px;
+    padding-right: 28px;
+  }
+  .hero { grid-template-columns: 1fr; gap: 36px; }
+  .about { grid-template-columns: 1fr; gap: 16px; }
+  .hero h1 { font-size: 38px; }
+  header nav { gap: 20px; }
+}

@@ -1,0 +1,9 @@
+node_modules
+dist
+*.local
+.DS_Store
+
+# Local dev tooling (not part of the site)
+.claude/
+.code-review-graph/
+.serena/
